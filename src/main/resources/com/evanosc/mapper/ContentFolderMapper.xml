@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.evanosc.mapper.ContentFolderMapper">
+  <resultMap id="BaseResultMap" type="com.evanosc.model.ContentFolder">
+    <id column="FOLDER_ID" jdbcType="INTEGER" property="folderId" />
+    <result column="PARENT_ID" jdbcType="INTEGER" property="parentId" />
+    <result column="FOLDER_NAME" jdbcType="VARCHAR" property="folderName" />
+    <result column="PATH" jdbcType="VARCHAR" property="path" />
+    <result column="SORT" jdbcType="INTEGER" property="sort" />
+    <result column="STATUS" jdbcType="INTEGER" property="status" />
+    <result column="FOLDER_TYPE" jdbcType="INTEGER" property="folderType" />
+    <result column="JUMP_URL" jdbcType="VARCHAR" property="jumpUrl" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy" />
+    <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    FOLDER_ID, PARENT_ID, FOLDER_NAME, PATH, SORT, STATUS, FOLDER_TYPE, JUMP_URL, CREATE_TIME, 
+    CREATE_BY, UPDATE_TIME, UPDATE_BY, REMARKS
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_content_folder
+    where FOLDER_ID = #{folderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_content_folder
+    where FOLDER_ID = #{folderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.evanosc.model.ContentFolder">
+    insert into t_content_folder (FOLDER_ID, PARENT_ID, FOLDER_NAME, 
+      PATH, SORT, STATUS, 
+      FOLDER_TYPE, JUMP_URL, CREATE_TIME, 
+      CREATE_BY, UPDATE_TIME, UPDATE_BY, 
+      REMARKS)
+    values (#{folderId,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{folderName,jdbcType=VARCHAR}, 
+      #{path,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{folderType,jdbcType=INTEGER}, #{jumpUrl,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.evanosc.model.ContentFolder">
+    insert into t_content_folder
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="folderId != null">
+        FOLDER_ID,
+      </if>
+      <if test="parentId != null">
+        PARENT_ID,
+      </if>
+      <if test="folderName != null">
+        FOLDER_NAME,
+      </if>
+      <if test="path != null">
+        PATH,
+      </if>
+      <if test="sort != null">
+        SORT,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="folderType != null">
+        FOLDER_TYPE,
+      </if>
+      <if test="jumpUrl != null">
+        JUMP_URL,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="createBy != null">
+        CREATE_BY,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY,
+      </if>
+      <if test="remarks != null">
+        REMARKS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="folderId != null">
+        #{folderId,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="folderName != null">
+        #{folderName,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="folderType != null">
+        #{folderType,jdbcType=INTEGER},
+      </if>
+      <if test="jumpUrl != null">
+        #{jumpUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.evanosc.model.ContentFolder">
+    update t_content_folder
+    <set>
+      <if test="parentId != null">
+        PARENT_ID = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="folderName != null">
+        FOLDER_NAME = #{folderName,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        PATH = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        SORT = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="folderType != null">
+        FOLDER_TYPE = #{folderType,jdbcType=INTEGER},
+      </if>
+      <if test="jumpUrl != null">
+        JUMP_URL = #{jumpUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FOLDER_ID = #{folderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.evanosc.model.ContentFolder">
+    update t_content_folder
+    set PARENT_ID = #{parentId,jdbcType=INTEGER},
+      FOLDER_NAME = #{folderName,jdbcType=VARCHAR},
+      PATH = #{path,jdbcType=VARCHAR},
+      SORT = #{sort,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=INTEGER},
+      FOLDER_TYPE = #{folderType,jdbcType=INTEGER},
+      JUMP_URL = #{jumpUrl,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      REMARKS = #{remarks,jdbcType=VARCHAR}
+    where FOLDER_ID = #{folderId,jdbcType=INTEGER}
+  </update>
+
+  <!-- 查询类目列表 -->
+  <select id="selectFolderList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_content_folder
+  </select>
+
+  <!-- 查询类目列表 -->
+  <select id="selectFolderListByCondition" resultMap="BaseResultMap" parameterType="com.evanosc.model.ContentFolder">
+    select
+    <include refid="Base_Column_List" />
+    from t_content_folder
+    where 1=1
+    <if test="folderId != null">
+      and FOLDER_ID = #{folderId,jdbcType=INTEGER}
+    </if>
+    <if test="parentId != null">
+      and PARENT_ID = #{parentId,jdbcType=INTEGER}
+    </if>
+    <if test="folderName != null">
+      and FOLDER_NAME = #{folderName,jdbcType=VARCHAR}
+    </if>
+    <if test="path != null">
+      and PATH = #{path,jdbcType=VARCHAR}
+    </if>
+    <if test="sort != null">
+      and SORT = #{sort,jdbcType=INTEGER}
+    </if>
+    <if test="status != null">
+      and STATUS = #{status,jdbcType=INTEGER}
+    </if>
+    <if test="folderType != null">
+      and FOLDER_TYPE = #{folderType,jdbcType=INTEGER}
+    </if>
+    <if test="jumpUrl != null">
+      and JUMP_URL = #{jumpUrl,jdbcType=VARCHAR}
+    </if>
+    <if test="createTime != null">
+      and CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="createBy != null">
+      and CREATE_BY = #{createBy,jdbcType=VARCHAR}
+    </if>
+    <if test="updateTime != null">
+      and UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateBy != null">
+      and UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+    </if>
+    <if test="remarks != null">
+      and REMARKS = #{remarks,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

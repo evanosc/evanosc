@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.evanosc.mapper.ContentArticleMapper" >
+  <resultMap id="BaseResultMap" type="com.evanosc.model.ContentArticle" >
+    <id column="ARTICLE_ID" property="articleId" jdbcType="INTEGER" />
+    <result column="FOLDER_ID" property="folderId" jdbcType="INTEGER" />
+    <result column="ARTICLE_NAME" property="articleName" jdbcType="VARCHAR" />
+    <result column="COUNT_VIEW" property="countView" jdbcType="INTEGER" />
+    <result column="COUNT_COMMENT" property="countComment" jdbcType="INTEGER" />
+    <result column="ARTICLE_TYPE" property="articleType" jdbcType="INTEGER" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="IS_COMMENT" property="isComment" jdbcType="INTEGER" />
+    <result column="IS_RECOMMEND" property="isRecommend" jdbcType="INTEGER" />
+    <result column="SORT" property="sort" jdbcType="INTEGER" />
+    <result column="JUMP_URL" property="jumpUrl" jdbcType="VARCHAR" />
+    <result column="IMAGE_URL" property="imageUrl" jdbcType="VARCHAR" />
+    <result column="IMAGE_NET_URL" property="imageNetUrl" jdbcType="VARCHAR" />
+    <result column="FILE_URL" property="fileUrl" jdbcType="VARCHAR" />
+    <result column="FILE_NAME" property="fileName" jdbcType="VARCHAR" />
+    <result column="APPROVE_STATUS" property="approveStatus" jdbcType="INTEGER" />
+    <result column="PUBLISH_TIME" property="publishTime" jdbcType="TIMESTAMP" />
+    <result column="PUBLISH_USER" property="publishUser" jdbcType="VARCHAR" />
+    <result column="START_TIME" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="END_TIME" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+    <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.evanosc.model.ContentArticle" extends="BaseResultMap" >
+    <result column="ARTICLE_CONTENT" property="articleContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ARTICLE_ID, FOLDER_ID, ARTICLE_NAME, COUNT_VIEW, COUNT_COMMENT, ARTICLE_TYPE, STATUS, 
+    IS_COMMENT, IS_RECOMMEND, SORT, JUMP_URL, IMAGE_URL, IMAGE_NET_URL, FILE_URL, FILE_NAME, 
+    APPROVE_STATUS, PUBLISH_TIME, PUBLISH_USER, START_TIME, END_TIME, CREATE_TIME, CREATE_BY, 
+    UPDATE_TIME, UPDATE_BY, REMARKS
+  </sql>
+  <sql id="Blob_Column_List" >
+    ARTICLE_CONTENT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_content_article
+    where ARTICLE_ID = #{articleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_content_article
+    where ARTICLE_ID = #{articleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.evanosc.model.ContentArticle" >
+    insert into t_content_article (ARTICLE_ID, FOLDER_ID, ARTICLE_NAME, 
+      COUNT_VIEW, COUNT_COMMENT, ARTICLE_TYPE, 
+      STATUS, IS_COMMENT, IS_RECOMMEND, 
+      SORT, JUMP_URL, IMAGE_URL, 
+      IMAGE_NET_URL, FILE_URL, FILE_NAME, 
+      APPROVE_STATUS, PUBLISH_TIME, PUBLISH_USER, 
+      START_TIME, END_TIME, CREATE_TIME, 
+      CREATE_BY, UPDATE_TIME, UPDATE_BY, 
+      REMARKS, ARTICLE_CONTENT)
+    values (#{articleId,jdbcType=INTEGER}, #{folderId,jdbcType=INTEGER}, #{articleName,jdbcType=VARCHAR}, 
+      #{countView,jdbcType=INTEGER}, #{countComment,jdbcType=INTEGER}, #{articleType,jdbcType=INTEGER}, 
+      #{status,jdbcType=VARCHAR}, #{isComment,jdbcType=INTEGER}, #{isRecommend,jdbcType=INTEGER}, 
+      #{sort,jdbcType=INTEGER}, #{jumpUrl,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, 
+      #{imageNetUrl,jdbcType=VARCHAR}, #{fileUrl,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, 
+      #{approveStatus,jdbcType=INTEGER}, #{publishTime,jdbcType=TIMESTAMP}, #{publishUser,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=VARCHAR}, #{articleContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.evanosc.model.ContentArticle" >
+    insert into t_content_article
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="articleId != null" >
+        ARTICLE_ID,
+      </if>
+      <if test="folderId != null" >
+        FOLDER_ID,
+      </if>
+      <if test="articleName != null" >
+        ARTICLE_NAME,
+      </if>
+      <if test="countView != null" >
+        COUNT_VIEW,
+      </if>
+      <if test="countComment != null" >
+        COUNT_COMMENT,
+      </if>
+      <if test="articleType != null" >
+        ARTICLE_TYPE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="isComment != null" >
+        IS_COMMENT,
+      </if>
+      <if test="isRecommend != null" >
+        IS_RECOMMEND,
+      </if>
+      <if test="sort != null" >
+        SORT,
+      </if>
+      <if test="jumpUrl != null" >
+        JUMP_URL,
+      </if>
+      <if test="imageUrl != null" >
+        IMAGE_URL,
+      </if>
+      <if test="imageNetUrl != null" >
+        IMAGE_NET_URL,
+      </if>
+      <if test="fileUrl != null" >
+        FILE_URL,
+      </if>
+      <if test="fileName != null" >
+        FILE_NAME,
+      </if>
+      <if test="approveStatus != null" >
+        APPROVE_STATUS,
+      </if>
+      <if test="publishTime != null" >
+        PUBLISH_TIME,
+      </if>
+      <if test="publishUser != null" >
+        PUBLISH_USER,
+      </if>
+      <if test="startTime != null" >
+        START_TIME,
+      </if>
+      <if test="endTime != null" >
+        END_TIME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="updateBy != null" >
+        UPDATE_BY,
+      </if>
+      <if test="remarks != null" >
+        REMARKS,
+      </if>
+      <if test="articleContent != null" >
+        ARTICLE_CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="articleId != null" >
+        #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="folderId != null" >
+        #{folderId,jdbcType=INTEGER},
+      </if>
+      <if test="articleName != null" >
+        #{articleName,jdbcType=VARCHAR},
+      </if>
+      <if test="countView != null" >
+        #{countView,jdbcType=INTEGER},
+      </if>
+      <if test="countComment != null" >
+        #{countComment,jdbcType=INTEGER},
+      </if>
+      <if test="articleType != null" >
+        #{articleType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="isComment != null" >
+        #{isComment,jdbcType=INTEGER},
+      </if>
+      <if test="isRecommend != null" >
+        #{isRecommend,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="jumpUrl != null" >
+        #{jumpUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imageNetUrl != null" >
+        #{imageNetUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUrl != null" >
+        #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null" >
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="approveStatus != null" >
+        #{approveStatus,jdbcType=INTEGER},
+      </if>
+      <if test="publishTime != null" >
+        #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publishUser != null" >
+        #{publishUser,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="articleContent != null" >
+        #{articleContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.evanosc.model.ContentArticle" >
+    update t_content_article
+    <set >
+      <if test="folderId != null" >
+        FOLDER_ID = #{folderId,jdbcType=INTEGER},
+      </if>
+      <if test="articleName != null" >
+        ARTICLE_NAME = #{articleName,jdbcType=VARCHAR},
+      </if>
+      <if test="countView != null" >
+        COUNT_VIEW = #{countView,jdbcType=INTEGER},
+      </if>
+      <if test="countComment != null" >
+        COUNT_COMMENT = #{countComment,jdbcType=INTEGER},
+      </if>
+      <if test="articleType != null" >
+        ARTICLE_TYPE = #{articleType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="isComment != null" >
+        IS_COMMENT = #{isComment,jdbcType=INTEGER},
+      </if>
+      <if test="isRecommend != null" >
+        IS_RECOMMEND = #{isRecommend,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        SORT = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="jumpUrl != null" >
+        JUMP_URL = #{jumpUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        IMAGE_URL = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imageNetUrl != null" >
+        IMAGE_NET_URL = #{imageNetUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUrl != null" >
+        FILE_URL = #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null" >
+        FILE_NAME = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="approveStatus != null" >
+        APPROVE_STATUS = #{approveStatus,jdbcType=INTEGER},
+      </if>
+      <if test="publishTime != null" >
+        PUBLISH_TIME = #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publishUser != null" >
+        PUBLISH_USER = #{publishUser,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        START_TIME = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="articleContent != null" >
+        ARTICLE_CONTENT = #{articleContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ARTICLE_ID = #{articleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.evanosc.model.ContentArticle" >
+    update t_content_article
+    set FOLDER_ID = #{folderId,jdbcType=INTEGER},
+      ARTICLE_NAME = #{articleName,jdbcType=VARCHAR},
+      COUNT_VIEW = #{countView,jdbcType=INTEGER},
+      COUNT_COMMENT = #{countComment,jdbcType=INTEGER},
+      ARTICLE_TYPE = #{articleType,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=VARCHAR},
+      IS_COMMENT = #{isComment,jdbcType=INTEGER},
+      IS_RECOMMEND = #{isRecommend,jdbcType=INTEGER},
+      SORT = #{sort,jdbcType=INTEGER},
+      JUMP_URL = #{jumpUrl,jdbcType=VARCHAR},
+      IMAGE_URL = #{imageUrl,jdbcType=VARCHAR},
+      IMAGE_NET_URL = #{imageNetUrl,jdbcType=VARCHAR},
+      FILE_URL = #{fileUrl,jdbcType=VARCHAR},
+      FILE_NAME = #{fileName,jdbcType=VARCHAR},
+      APPROVE_STATUS = #{approveStatus,jdbcType=INTEGER},
+      PUBLISH_TIME = #{publishTime,jdbcType=TIMESTAMP},
+      PUBLISH_USER = #{publishUser,jdbcType=VARCHAR},
+      START_TIME = #{startTime,jdbcType=TIMESTAMP},
+      END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      REMARKS = #{remarks,jdbcType=VARCHAR},
+      ARTICLE_CONTENT = #{articleContent,jdbcType=LONGVARCHAR}
+    where ARTICLE_ID = #{articleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.evanosc.model.ContentArticle" >
+    update t_content_article
+    set FOLDER_ID = #{folderId,jdbcType=INTEGER},
+      ARTICLE_NAME = #{articleName,jdbcType=VARCHAR},
+      COUNT_VIEW = #{countView,jdbcType=INTEGER},
+      COUNT_COMMENT = #{countComment,jdbcType=INTEGER},
+      ARTICLE_TYPE = #{articleType,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=VARCHAR},
+      IS_COMMENT = #{isComment,jdbcType=INTEGER},
+      IS_RECOMMEND = #{isRecommend,jdbcType=INTEGER},
+      SORT = #{sort,jdbcType=INTEGER},
+      JUMP_URL = #{jumpUrl,jdbcType=VARCHAR},
+      IMAGE_URL = #{imageUrl,jdbcType=VARCHAR},
+      IMAGE_NET_URL = #{imageNetUrl,jdbcType=VARCHAR},
+      FILE_URL = #{fileUrl,jdbcType=VARCHAR},
+      FILE_NAME = #{fileName,jdbcType=VARCHAR},
+      APPROVE_STATUS = #{approveStatus,jdbcType=INTEGER},
+      PUBLISH_TIME = #{publishTime,jdbcType=TIMESTAMP},
+      PUBLISH_USER = #{publishUser,jdbcType=VARCHAR},
+      START_TIME = #{startTime,jdbcType=TIMESTAMP},
+      END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      REMARKS = #{remarks,jdbcType=VARCHAR}
+    where ARTICLE_ID = #{articleId,jdbcType=INTEGER}
+  </update>
+
+  <!-- 查询文章列表 -->
+  <select id="selectArticleList" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_content_article
+  </select>
+</mapper>

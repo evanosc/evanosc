@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.evanosc.mapper.SystemRoleMenuMapper">
+  <resultMap id="BaseResultMap" type="com.evanosc.model.SystemRoleMenu">
+    <id column="ROLE_MENU_ID" jdbcType="INTEGER" property="roleMenuId" />
+    <result column="ROLE_ID" jdbcType="INTEGER" property="roleId" />
+    <result column="MENU_ID" jdbcType="INTEGER" property="menuId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ROLE_MENU_ID, ROLE_ID, MENU_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_system_role_menu
+    where ROLE_MENU_ID = #{roleMenuId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_system_role_menu
+    where ROLE_MENU_ID = #{roleMenuId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.evanosc.model.SystemRoleMenu">
+    insert into t_system_role_menu (ROLE_MENU_ID, ROLE_ID, MENU_ID
+      )
+    values (#{roleMenuId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{menuId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.evanosc.model.SystemRoleMenu">
+    insert into t_system_role_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleMenuId != null">
+        ROLE_MENU_ID,
+      </if>
+      <if test="roleId != null">
+        ROLE_ID,
+      </if>
+      <if test="menuId != null">
+        MENU_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleMenuId != null">
+        #{roleMenuId,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="menuId != null">
+        #{menuId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.evanosc.model.SystemRoleMenu">
+    update t_system_role_menu
+    <set>
+      <if test="roleId != null">
+        ROLE_ID = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="menuId != null">
+        MENU_ID = #{menuId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ROLE_MENU_ID = #{roleMenuId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.evanosc.model.SystemRoleMenu">
+    update t_system_role_menu
+    set ROLE_ID = #{roleId,jdbcType=INTEGER},
+      MENU_ID = #{menuId,jdbcType=INTEGER}
+    where ROLE_MENU_ID = #{roleMenuId,jdbcType=INTEGER}
+  </update>
+  <!-- 根据角色ID条件删除角色授权信息 -->
+  <delete id="deleteRoleMenuByRoleId" parameterType="java.lang.Integer">
+    delete from t_system_role_menu
+    where ROLE_ID = #{roleId,jdbcType=INTEGER}
+  </delete>
+  <!-- 根据条件获取角色授权信息 -->
+  <select id="selectSystemRoleMenuByCondition" parameterType="com.evanosc.model.SystemRoleMenu" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_system_role_menu
+    where 1=1
+    <if test="roleMenuId != null">
+      and ROLE_MENU_ID = #{roleMenuId,jdbcType=INTEGER}
+    </if>
+    <if test="roleId != null">
+      and ROLE_ID = #{roleId,jdbcType=INTEGER}
+    </if>
+    <if test="menuId != null">
+      and MENU_ID = #{menuId,jdbcType=INTEGER}
+    </if>
+  </select>
+</mapper>

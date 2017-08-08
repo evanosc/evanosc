@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.evanosc.mapper.SystemUserMapper">
+    <resultMap id="BaseResultMap" type="com.evanosc.model.SystemUser">
+        <id column="USER_ID" property="userId" jdbcType="INTEGER"/>
+        <result column="LOGIN_NAME" property="loginName" jdbcType="VARCHAR"/>
+        <result column="LOGIN_PASSWORD" property="loginPassword" jdbcType="VARCHAR"/>
+        <result column="USER_NAME" property="userName" jdbcType="VARCHAR"/>
+        <result column="REAL_NAME" property="realName" jdbcType="VARCHAR"/>
+        <result column="SEX" property="sex" jdbcType="INTEGER"/>
+        <result column="AGE" property="age" jdbcType="INTEGER"/>
+        <result column="PIC_IMG" property="picImg" jdbcType="VARCHAR"/>
+        <result column="STATUS" property="status" jdbcType="INTEGER"/>
+        <result column="LAST_LOGIN_TIME" property="lastLoginTime" jdbcType="TIMESTAMP"/>
+        <result column="LAST_LOGIN_IP" property="lastLoginIp" jdbcType="VARCHAR"/>
+        <result column="EMAIL" property="email" jdbcType="VARCHAR"/>
+        <result column="TELEPHONE" property="telephone" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR"/>
+        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    USER_ID, LOGIN_NAME, LOGIN_PASSWORD, USER_NAME, REAL_NAME, SEX, AGE, PIC_IMG, STATUS, 
+    LAST_LOGIN_TIME, LAST_LOGIN_IP, EMAIL, TELEPHONE, CREATE_TIME, CREATE_BY, UPDATE_TIME, 
+    UPDATE_BY
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_system_user
+        where USER_ID = #{userId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_system_user
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.evanosc.model.SystemUser">
+    insert into t_system_user (USER_ID, LOGIN_NAME, LOGIN_PASSWORD, 
+      USER_NAME, REAL_NAME, SEX, 
+      AGE, PIC_IMG, STATUS, 
+      LAST_LOGIN_TIME, LAST_LOGIN_IP, EMAIL, 
+      TELEPHONE, CREATE_TIME, CREATE_BY, 
+      UPDATE_TIME, UPDATE_BY)
+    values (#{userId,jdbcType=INTEGER}, #{loginName,jdbcType=VARCHAR}, #{loginPassword,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
+      #{age,jdbcType=INTEGER}, #{picImg,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{lastLoginTime,jdbcType=TIMESTAMP}, #{lastLoginIp,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.evanosc.model.SystemUser">
+        insert into t_system_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                USER_ID,
+            </if>
+            <if test="loginName != null">
+                LOGIN_NAME,
+            </if>
+            <if test="loginPassword != null">
+                LOGIN_PASSWORD,
+            </if>
+            <if test="userName != null">
+                USER_NAME,
+            </if>
+            <if test="realName != null">
+                REAL_NAME,
+            </if>
+            <if test="sex != null">
+                SEX,
+            </if>
+            <if test="age != null">
+                AGE,
+            </if>
+            <if test="picImg != null">
+                PIC_IMG,
+            </if>
+            <if test="status != null">
+                STATUS,
+            </if>
+            <if test="lastLoginTime != null">
+                LAST_LOGIN_TIME,
+            </if>
+            <if test="lastLoginIp != null">
+                LAST_LOGIN_IP,
+            </if>
+            <if test="email != null">
+                EMAIL,
+            </if>
+            <if test="telephone != null">
+                TELEPHONE,
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME,
+            </if>
+            <if test="createBy != null">
+                CREATE_BY,
+            </if>
+            <if test="updateTime != null">
+                UPDATE_TIME,
+            </if>
+            <if test="updateBy != null">
+                UPDATE_BY,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="loginName != null">
+                #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="loginPassword != null">
+                #{loginPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null">
+                #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="picImg != null">
+                #{picImg,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="lastLoginTime != null">
+                #{lastLoginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastLoginIp != null">
+                #{lastLoginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="telephone != null">
+                #{telephone,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.evanosc.model.SystemUser">
+        update t_system_user
+        <set>
+            <if test="loginName != null">
+                LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="loginPassword != null">
+                LOGIN_PASSWORD = #{loginPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                USER_NAME = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null">
+                REAL_NAME = #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                SEX = #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="age != null">
+                AGE = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="picImg != null">
+                PIC_IMG = #{picImg,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                STATUS = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="lastLoginTime != null">
+                LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastLoginIp != null">
+                LAST_LOGIN_IP = #{lastLoginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                EMAIL = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="telephone != null">
+                TELEPHONE = #{telephone,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                CREATE_BY = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where USER_ID = #{userId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.evanosc.model.SystemUser">
+    update t_system_user
+    set LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
+      LOGIN_PASSWORD = #{loginPassword,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      REAL_NAME = #{realName,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=INTEGER},
+      AGE = #{age,jdbcType=INTEGER},
+      PIC_IMG = #{picImg,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=INTEGER},
+      LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=TIMESTAMP},
+      LAST_LOGIN_IP = #{lastLoginIp,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </update>
+
+    <select id="queryByUserName" resultType="com.evanosc.model.SystemUser">
+        select * from t_system_user where LOGIN_NAME = #{username}
+    </select>
+
+    <select id="queryList" resultType="com.evanosc.model.SystemUser">
+        select * from t_system_user
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="queryTotal" resultType="java.lang.Integer">
+        select count(*) from t_system_user
+    </select>
+
+    <!-- 根据查找条件查找所有管理员 -->
+    <select id="selectAllSystemUser" resultType="com.evanosc.model.SystemUser" parameterType="com.evanosc.model.QueryUser">
+        select
+        <include refid="Base_Column_List"/>
+        from t_system_user
+        <where>
+            <if test="searchContent != null and searchContent !=''">
+                AND (USER_NAME LIKE '%' #{searchContent} '%' OR REAL_NAME LIKE '%' #{searchContent} '%'
+                OR AGE LIKE '%' #{searchContent} '%' OR LAST_LOGIN_IP LIKE '%' #{searchContent} '%'
+                OR EMAIL LIKE '%' #{searchContent} '%' OR TELEPHONE LIKE '%' #{searchContent} '%')
+            </if>
+            <if test="beginCreateTime != null">
+                AND CREATE_TIME >= #{beginCreateTime}
+            </if>
+            <if test="endCreateTime != null">
+                AND <![CDATA[CREATE_TIME  <= #{endCreateTime}]]>
+            </if>
+        </where>
+    </select>
+    <!-- 根据查找条件获取管理员数量 -->
+    <select id="selectCount" resultType="java.lang.Integer" parameterType="com.evanosc.model.SystemUser">
+        select count(*) from t_system_user
+        <where>
+            <if test="loginName != null">
+                and LOGIN_NAME = #{loginName,jdbcType=VARCHAR}
+            </if>
+            <if test="loginPassword != null">
+                and LOGIN_PASSWORD = #{loginPassword,jdbcType=VARCHAR}
+            </if>
+            <if test="userName != null">
+                and USER_NAME = #{userName,jdbcType=VARCHAR}
+            </if>
+            <if test="realName != null">
+                and REAL_NAME = #{realName,jdbcType=VARCHAR}
+            </if>
+            <if test="sex != null">
+                and SEX = #{sex,jdbcType=INTEGER}
+            </if>
+            <if test="age != null">
+                and AGE = #{age,jdbcType=INTEGER}
+            </if>
+            <if test="picImg != null">
+                and PIC_IMG = #{picImg,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and STATUS = #{status,jdbcType=INTEGER}
+            </if>
+            <if test="lastLoginTime != null">
+                and LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="lastLoginIp != null">
+                and LAST_LOGIN_IP = #{lastLoginIp,jdbcType=VARCHAR}
+            </if>
+            <if test="email != null">
+                and EMAIL = #{email,jdbcType=VARCHAR}
+            </if>
+            <if test="telephone != null">
+                and TELEPHONE = #{telephone,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="createBy != null">
+                and CREATE_BY = #{createBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updateTime != null">
+                and UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateBy != null">
+                and UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+</mapper>
